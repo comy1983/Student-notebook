@@ -22,7 +22,7 @@ st.markdown("### 🎛️ لوحة العمليات والتحليل الذكي")
 r1_c1, r1_c2, r1_c3, r1_c4 = st.columns(4)
 with r1_c1:
     st.markdown("<div style='text-align: center; font-size: 30px;'>📂</div>", unsafe_allow_html=True)
-    if st.button("إدخال درجات المدرسة", key="tab_school", use_container_width=True):
+    if st.button("إدخل درجات المدرسة", key="tab_school", use_container_width=True):
         st.session_state.active_tab = "school"
 with r1_c2:
     st.markdown("<div style='text-align: center; font-size: 30px;'>📊</div>", unsafe_allow_html=True)
@@ -39,14 +39,14 @@ with r1_c4:
 
 st.markdown("<br><hr>", unsafe_allow_html=True)
 
-# تهيئة بيانات تجريبية مسبقة بأرقام صحيحة لضمان عمل الرسوم البيانية والتنبؤات
+# تهيئة بيانات تجريبية مسبقة بأرقام صحيحة تماماً لضمان عمل الرسوم والتنبؤات
 if 'df_school' not in st.session_state:
     st.session_state.df_school = pd.DataFrame({
         'الرقم الأكاديمي': [101, 102, 103, 104, 105],
-        'اسم الطالبة': ['سارة أحمد', 'نورة عبد الله', 'ريم محمد', 'هند سلطان', 'أمل فهد'],
+        'اسم الطالبة': ['سارة أحمد', 'نورة عبد الله', 'ريم محمد', 'هند سلطان', 'أمل fهد'],
         'الرياضيات': [95, 45, 88, 72, 48],
-        'العلوم': [92, 40, 85, 64, 55],
-        'اللغة العربية': [98, 62, 90, 78, 50]
+        'العلوم': [92, 55, 85, 64, 42],
+        'اللغة العربية': [98, 62, 90, 78, 52]
     })
 
 # 3. معالجة وتوجيه الشاشات التفاعلية
@@ -116,9 +116,9 @@ elif st.session_state.active_tab == "predict":
     predict_data = pd.DataFrame(index=df['اسم الطالبة'])
     predict_data['المعدل الحالي'] = df[subjects].mean(axis=1).round(1)
     
-    # نموذج رياضي تنبئي بالأرقام الصحيحة
-    predict_data['المعدل المتوقع (بدون خطة علاجية)'] = (predict_data['المعدل الحالي'] * 0.93).round(1)
-    predict_data['المعدل المتوقع (بعد تطبيق الخطة العلاجية)'] = (predict_data['المعدل الحالي'] * 1.06).round(1)
+    # نموذج رياضي تنبئي بالأرقام الصحيحة والثابتة
+    predict_data['المعدل المتوقع (بدون خطة علاجية)'] = (predict_data['المعدل الحالي'] * 0.92).round(1)
+    predict_data['المعدل المتوقع (بعد تطبيق الخطة العلاجية)'] = (predict_data['المعدل الحالي'] * 1.07).round(1)
     
     predict_data['المعدل المتوقع (بدون خطة علاجية)'] = predict_data['المعدل المتوقع (بدون خطة علاجية)'].clip(upper=100)
     predict_data['المعدل المتوقع (بعد تطبيق الخطة العلاجية)'] = predict_data['المعدل المتوقع (بعد تطبيق الخطة العلاجية)'].clip(upper=100)
